@@ -95,7 +95,6 @@ let librosConDescuento = libros.map(libro => {
     };
 });
 
-// Listar los libros por Título, Autor, Editorial, Precio y Descuento
 let listaLibrosConDescuento = librosConDescuento.map(libro => ({
     titulo: libro.titulo,
     autor: libro.autor,
@@ -107,7 +106,6 @@ let listaLibrosConDescuento = librosConDescuento.map(libro => ({
 console.log("Lista de libros (Título, Autor, Editorial, Precio, Descuento):");
 console.log(listaLibrosConDescuento);
 
-// Resto del código de interacción con el usuario
 function mostrarLibros() {
     console.log('Lista de libros:');
     libros.forEach((libro, index) => {
@@ -116,24 +114,62 @@ function mostrarLibros() {
     });
 }
 
+function mostrarLibrosConDescuento() {
+    librosConDescuento.forEach((iteracion, index) => {
+        console.log(`Iteración ${index + 1}:`);
+        console.table(iteracion);
+    });
+}
+
 let salir = false;
 while (!salir) {
-    let opcion = prompt('Ingrese una opción: 1. Ver libros, 2. Agregar libro, 3. Salir');
+    let opcion = prompt('Ingrese una opción: 1. Ver libros, 2. Agregar libro, 3. Salir, 4. Mostrar pila');
     switch (opcion) {
         case '1':
             mostrarLibros();
             break;
         case '2':
             let titulo = prompt('Ingrese el título del libro:');
-            console.log(titulo);
-            let autor = prompt('Ingrese el autor del libro:');
-            let editorial = prompt('Ingrese la editorial del libro:');
-            let precio = prompt('Ingrese el precio del libro:');
             let nuevoLibro = {
                 titulo,
-                autor,
-                editorial,
-                precio: precio + ' USD',
+                autor: prompt('Ingrese el autor del libro:'),
+                genero: prompt('Ingrese el género del libro:'),
+                idioma: prompt('Ingrese el idioma del libro:'),
+                precio: prompt('Ingrese el precio del libro:'),
+                formato: prompt('Ingrese el formato del libro:'),
+                isbn: prompt('Ingrese el ISBN del libro:'),
+                descripcion: prompt('Ingrese la descripción del libro:'),
+                estado: 'Nuevo',
+                ubicacion: 'Colombia',
+                editorial: prompt('Ingrese la editorial del libro:'),
+                paginas: prompt('Ingrese el número de páginas del libro:'),
             };
-        }};
             libros.push(nuevoLibro);
+            break;
+        case '3':
+            salir = true;
+            break;
+        case '4':
+            mostrarLibrosConDescuento();
+            break;
+        default:
+            console.log('Opción no válida, por favor intente de nuevo.');
+    }
+}
+const listar1 = libros.map(libro => {
+    let precioOriginal = parseFloat(libro.precio.replace(' USD', ''));
+    let descuento = 0.20; // 20% de descuento
+    let precioConDescuento = (precioOriginal * (1 - descuento)).toFixed(2) + ' USD';
+    return {
+        Título: libro.titulo,
+        Autor: libro.autor,
+        Editorial: libro.editorial,
+        Precio: libro.precio,
+        Descuento: '20%',
+        'Precio con Descuento': precioConDescuento
+    };
+});
+
+console.table(listar1);
+console.log('Disfrute de su lectura.')
+console.log('Disfrute de su lectura.');

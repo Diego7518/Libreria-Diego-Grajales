@@ -377,14 +377,14 @@ let libros = [
     peso: '370g',
     },
     ];
-        
+
     let librosListado = libros.map(libro => ({
         Titulo: libro.titulo,
         Autor: libro.autor,
         Editorial: libro.editorial,
         Precio: libro.precio
     }));
-        
+    
     let librosConDescuento = [];
     for (let i = 0; i < 10; i++) {
         let iteracion = libros.map(libro => {
@@ -402,21 +402,21 @@ let libros = [
         });
         librosConDescuento.push(iteracion);
     }
-        
+    
     function mostrarLibros() {
         console.log('Lista de libros:');
         libros.forEach((libro, index) => {
             console.log(`${index + 1}. ${libro.titulo}`);
         });
     }
-        
+    
     function mostrarLibrosConDescuento() {
         librosConDescuento.forEach((iteracion, index) => {
             console.log(`Iteración ${index + 1}:`);
             console.table(iteracion);
         });
     }
-        
+    
     function mostrarResumen() {
         let librosMayor50 = libros.filter(libro => parseFloat(libro.precio.replace(' USD', '')) > 20);
         let librosPorPaginas = libros.map(libro => ({
@@ -425,7 +425,7 @@ let libros = [
             Editorial: libro.editorial,
             Paginas: libro.paginas
         })).sort((a, b) => b.Paginas - a.Paginas);
-        
+    
         console.log('Libros con precio mayor a 20 USD:');
         console.table(librosMayor50.map(libro => ({
             Titulo: libro.titulo,
@@ -433,14 +433,58 @@ let libros = [
             Editorial: libro.editorial,
             Precio: libro.precio
         })));
-        
+    
         console.log('Libros ordenados por número más alto de páginas:');
         console.table(librosPorPaginas);
     }
-        
+    
+    function mostrarResumenExtendido() {
+        let librosCaros = libros.filter(libro => parseFloat(libro.precio.replace(' USD', '')) > 11)
+            .map(libro => ({
+                Titulo: libro.titulo,
+                Autor: libro.autor,
+                Precio: libro.precio
+            }));
+    
+        let librosMenos100Paginas = libros.filter(libro => parseInt(libro.paginas) < 100)
+            .map(libro => ({
+                Titulo: libro.titulo,
+                Autor: libro.autor,
+                Editorial: libro.editorial,
+                Paginas: libro.paginas
+            }));
+    
+        let librosCarosMayor20 = libros.filter(libro => parseFloat(libro.precio.replace(' USD', '')) > 20)
+            .map(libro => ({
+                Titulo: libro.titulo,
+                Autor: libro.autor,
+                Precio: libro.precio
+            }))
+            .sort((a, b) => parseFloat(b.Precio.replace(' USD', '')) - parseFloat(a.Precio.replace(' USD', '')));
+    
+        let librosPorPaginasMayorMenor = libros.map(libro => ({
+            Titulo: libro.titulo,
+            Autor: libro.autor,
+            Editorial: libro.editorial,
+            Paginas: libro.paginas
+        })).sort((a, b) => parseInt(b.Paginas) - parseInt(a.Paginas));
+    
+        console.log('Libros caros (mayores de 11 USD):');
+        console.table(librosCaros);
+    
+        console.log('Libros con menos de 100 páginas:');
+        console.table(librosMenos100Paginas);
+    
+        console.log('Libros caros (mayores de 20 USD) ordenados de mayor a menor:');
+        console.table(librosCarosMayor20);
+    
+        console.log('Libros ordenados por número más alto de páginas:');
+        console.table(librosPorPaginasMayorMenor);
+    }
+    
     let salir = false;
     while (!salir) {
-        let opcion = prompt('Ingrese una opción: 1. Ver libros, 2. Agregar libro, 3. Salir, 4. Mostrar pila, 5. Mostrar resumen de este segmento');
+        let opcion = prompt('Ingrese una opción: 1. Ver libros, 2. Agregar libro, 3. Salir, 4. Mostrar pila, 5. Mostrar resumen de este segmento, 6. Mostrar resumen extendido');
         switch (opcion) {
             case '1':
                 mostrarLibros();
@@ -474,25 +518,11 @@ let libros = [
             case '5':
                 mostrarResumen();
                 break;
-            default:
-                console.log('Opción no válida, por favor intente de nuevo.');
-        }
-    }
-        
-    const listar1 = libros.map(libro => {
-        let precioOriginal = parseFloat(libro.precio.replace(' USD', ''));
-        let descuento = 0.20;
-        
-        let precioConDescuento = (precioOriginal * (1 - descuento)).toFixed(2) + ' USD';
-        return {
-            Título: libro.titulo,
-            Autor: libro.autor,
-            Editorial: libro.editorial,
-            Precio: libro.precio,
-            Descuento: '20%',
-            'Precio con Descuento': precioConDescuento
+            case '6':
+                mostrarResumenExtendido();
+                break;
+            case '7':
+              default:
+                console.log('opcion no valida');
+            }
         };
-    });
-        
-    console.table(listar1);
-    console.log('Disfrute de su lectura.');

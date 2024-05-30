@@ -484,7 +484,7 @@ let libros = [
     
     let salir = false;
     while (!salir) {
-        let opcion = prompt('Ingrese una opción: 1. Ver libros, 2. Agregar libro, 3. Salir, 4. Mostrar pila, 5. Mostrar resumen de este segmento, 6. Mostrar resumen extendido');
+        let opcion = prompt('Ingrese una opción: 1. Ver libros, 2. Agregar libro, 3. Mostrar pila, 4. Mostrar resumen de este segmento, 5. Mostrar resumen extendido, 6. Salir,');
         switch (opcion) {
             case '1':
                 mostrarLibros();
@@ -508,18 +508,19 @@ let libros = [
                     paginas: prompt('Ingrese el número de páginas del libro:')
                 };
                 libros.push(nuevoLibro);
+                console.log(nuevoLibro);
                 break;
             case '3':
-                salir = true;
-                break;
-            case '4':
                 mostrarLibrosConDescuento();
                 break;
-            case '5':
+            case '4':
                 mostrarResumen();
                 break;
-            case '6':
+            case '5':
                 mostrarResumenExtendido();
+                break;
+            case '6':
+                salir = true;
                 break;
             case '7':
               default:

@@ -93,7 +93,7 @@ let libros = [
     titulo: 'American Psycho',
     autor: 'Bret Easton Ellis',
     genero: 'ficcion',
-    idioma: 'Inglés',
+    idioma: 'Ingles',
     precio: '30 USD',
     formato: 'Tapa blanda',
     isbn: '09788439736646.',
@@ -129,7 +129,7 @@ let libros = [
     titulo: 'El principito',
     autor: 'Antoine de Saint-Exupéry',
     genero: 'ficcion',
-    idioma: 'Francés',
+    idioma: 'Frances',
     precio: '10 USD',
     formato: 'Tapa blanda',
     isbn: '978-0156012195',
@@ -147,7 +147,7 @@ let libros = [
     titulo: 'The Catcher in the Rye',
     autor: 'J.D. Salinger',
     genero: 'ficcion',
-    idioma: 'Inglés',
+    idioma: 'Ingles',
     precio: '14 USD',
     formato: 'Tapa blanda',
     isbn: '978-0316769488',
@@ -201,7 +201,7 @@ let libros = [
     titulo: 'The Great Gatsby',
     autor: 'F. Scott Fitzgerald',
     genero: 'ficcion',
-    idioma: 'Inglés',
+    idioma: 'Ingles',
     precio: '11 USD',
     formato: 'Tapa blanda',
     isbn: '978-0743273565',
@@ -219,7 +219,7 @@ let libros = [
     titulo: '1984',
     autor: 'George Orwell',
     genero: 'ficcion',
-    idioma: 'Inglés',
+    idioma: 'Ingles',
     precio: '18 USD',
     formato: 'Tapa blanda',
     isbn: '978-0451524935',
@@ -291,7 +291,7 @@ let libros = [
     titulo: 'Moby Dick',
     autor: 'Herman Melville',
     genero: 'ficcion',
-    idioma: 'Inglés',
+    idioma: 'Ingles',
     precio: '17 USD',
     formato: 'Tapa blanda',
     isbn: '978-1503280786',
@@ -345,7 +345,7 @@ let libros = [
     titulo: 'Frankenstein',
     autor: 'Mary Shelley',
     genero: 'ficcion',
-    idioma: 'Inglés',
+    idioma: 'Ingles',
     precio: '16 USD',
     formato: 'Tapa blanda',
     isbn: '978-0486282114',
@@ -363,7 +363,7 @@ let libros = [
     titulo: 'Dracula',
     autor: 'Bram Stoker',
     genero: 'ficcion',
-    idioma: 'Inglés',
+    idioma: 'Ingles',
     precio: '18 USD',
     formato: 'Tapa blanda',
     isbn: '978-0486411094',
@@ -482,9 +482,114 @@ let libros = [
         console.table(librosPorPaginasMayorMenor);
     }
     
+    function buscarPorCriterio(criterio, valor) {
+        let resultado = libros.filter(libro => libro[criterio].toString().toLowerCase().includes(valor.toLowerCase()));
+        if (resultado.length > 0) {
+            console.table(resultado);
+        } else {
+            console.log(`No se encontraron libros con ${criterio} igual a "${valor}".`);
+        }
+    }
+    
+    function generarBusquedaAleatoria(iteracion) {
+        let resultado = libros;
+    
+        switch (iteracion) {
+            case 1:
+                resultado = resultado.map(libro => ({
+                    Titulo: libro.titulo,
+                    Autor: libro.autor,
+                    Editorial: libro.editorial,
+                    Precio: libro.precio
+                }));
+                break;
+            case 2:
+                resultado = resultado.map(libro => ({
+                    Titulo: libro.titulo,
+                    Idioma: libro.idioma,
+                    Descuento: '20%',
+                    Peso: libro.peso
+                }));
+                break;
+            case 3:
+                resultado = resultado.map(libro => ({
+                    Titulo: libro.titulo,
+                    Dimensiones: libro.dimensiones,
+                    'Fecha de Publicación': libro.fecha_publicacion,
+                    Ubicación: libro.ubicacion
+                }));
+                break;
+            case 4:
+                resultado = resultado.map(libro => ({
+                    Titulo: libro.titulo,
+                    Autor: libro.autor,
+                    Género: libro.genero,
+                    Idioma: libro.idioma
+                }));
+                break;
+            case 5:
+                resultado = resultado.map(libro => ({
+                    Titulo: libro.titulo,
+                    Páginas: libro.paginas,
+                    Estado: libro.estado,
+                    Precio: libro.precio
+                }));
+                break;
+            case 6:
+                resultado = resultado.map(libro => ({
+                    Titulo: libro.titulo,
+                    Descuento: '20%',
+                    ISBN: libro.isbn,
+                    Género: libro.genero
+                }));
+                break;
+            case 7:
+                resultado = resultado.map(libro => ({
+                    Titulo: libro.titulo,
+                    Editorial: libro.editorial,
+                    Idioma: libro.idioma,
+                    Precio: libro.precio
+                }));
+                break;
+            case 8:
+                resultado = resultado.map(libro => ({
+                    Titulo: libro.titulo,
+                    Precio: libro.precio,
+                    Descuento: '20%',
+                    ISBN: libro.isbn
+                }));
+                break;
+            case 9:
+                resultado = resultado.map(libro => ({
+                    Titulo: libro.titulo,
+                    ISBN: libro.isbn,
+                    Idioma: libro.idioma,
+                    Páginas: libro.paginas
+                }));
+                break;
+            case 10:
+                resultado = resultado.map(libro => ({
+                    Titulo: libro.titulo,
+                    Estado: libro.estado,
+                    Descuento: '20%',
+                    Dimensiones: libro.dimensiones
+                }));
+                break;
+            default:
+                console.log('Iteración no válida.');
+                return;
+        }
+    
+        if (resultado.length > 0) {
+            console.table(resultado);
+        } else {
+            console.log('No se encontraron libros para esta iteración.');
+        }
+    }
+    
     let salir = false;
     while (!salir) {
-        let opcion = prompt('Ingrese una opción: 1. Ver libros, 2. Agregar libro, 3. Mostrar pila, 4. Mostrar resumen de este segmento, 5. Mostrar resumen extendido, 6. Salir,');
+        let opcion = prompt('Ingrese una opción: 1. Ver libros, 2. Agregar libro, 3. Mostrar pila, 4. Mostrar resumen de este segmento, 5. Mostrar resumen extendido, 6. Buscar libro por criterio,7. Realizar 10 interaciones, 8. Salir');
         switch (opcion) {
             case '1':
                 mostrarLibros();
@@ -505,11 +610,12 @@ let libros = [
                     estado: 'Nuevo',
                     ubicacion: 'Colombia',
                     editorial: prompt('Ingrese la editorial del libro:'),
-                    paginas: prompt('Ingrese el número de páginas del libro:')
+                    paginas: prompt('Ingrese el número de páginas del libro:'),
+                    fecha_publicacion: prompt('Ingrese la fecha de publicación del libro:')
                 };
                 libros.push(nuevoLibro);
-                console.log(nuevoLibro);
                 break;
+            
             case '3':
                 mostrarLibrosConDescuento();
                 break;
@@ -520,10 +626,22 @@ let libros = [
                 mostrarResumenExtendido();
                 break;
             case '6':
-                salir = true;
+                let criterio = prompt('Ingrese el criterio de búsqueda (titulo, autor, fecha_publicacion, genero, idioma):');
+                let valor = prompt(`Ingrese el valor para buscar por ${criterio}:`);
+                buscarPorCriterio(criterio, valor);
                 break;
             case '7':
-              default:
-                console.log('opcion no valida');
-            }
-        };
+                for (let i = 0; i < 10; i++) {
+                    console.log(`Interacion ${i + 1}:`);
+                    generarBusquedaAleatoria(i + 1);
+                }
+                break;
+                case '8':
+                salir = true;
+                console.log('Gracias por usar nuestro sistema');
+                break;
+            default:
+                console.log('Opción no válida. Intente de nuevo.');
+                break;
+        }
+    };

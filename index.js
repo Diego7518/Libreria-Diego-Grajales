@@ -386,7 +386,7 @@ let libros = [
     }));
     
     let librosConDescuento = [];
-    for (let i = 0; i < 10; i++) {
+    
         let iteracion = libros.map(libro => {
             let precioOriginal = parseFloat(libro.precio.replace(' USD', ''));
             let descuento = 0.20;
@@ -401,7 +401,7 @@ let libros = [
             };
         });
         librosConDescuento.push(iteracion);
-    }
+    
     
     function mostrarLibros() {
         console.log('Lista de libros:');
@@ -412,7 +412,6 @@ let libros = [
     
     function mostrarLibrosConDescuento() {
         librosConDescuento.forEach((iteracion, index) => {
-            console.log(`Iteración ${index + 1}:`);
             console.table(iteracion);
         });
     }
@@ -589,7 +588,7 @@ let libros = [
     
     let salir = false;
     while (!salir) {
-        let opcion = prompt('Ingrese una opción: 1. Ver libros, 2. Agregar libro, 3. Mostrar pila, 4. Mostrar resumen de este segmento, 5. Mostrar resumen extendido, 6. Buscar libro por criterio,7. Realizar 10 interaciones, 8. Salir');
+        let opcion = prompt('Ingrese una opción: 1. Ver libros, 2. Agregar libro, 3. Mostrar libros con descuento, 4. Mostrar resumen de este segmento, 5. Mostrar resumen extendido, 6. Buscar libro por criterio,7. Realizar 10 interaciones, 8. Salir');
         switch (opcion) {
             case '1':
                 mostrarLibros();
